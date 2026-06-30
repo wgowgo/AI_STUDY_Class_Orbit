@@ -34,6 +34,8 @@ type XaiInput = {
   classQuality: number
 }
 
+import { apiJsonHeaders } from './apiHeaders'
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? ''
 
 export async function analyzeClassFromText(transcript: string) {
@@ -280,7 +282,7 @@ export async function nlqQuery(input: {
 }) {
   const res = await fetch(`${API_BASE}/api/nlq/query`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: apiJsonHeaders(),
     body: JSON.stringify(input),
   })
   if (!res.ok) {

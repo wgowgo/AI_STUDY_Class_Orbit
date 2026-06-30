@@ -25,10 +25,10 @@ export function TourViewport({
   onOpenAi,
 }: Props) {
   return (
-    <div className=tour-viewport>
+    <div className="tour-viewport">
       <TourBackdrop dimmed={backdropDimmed} reduceMotion={reduceMotion} />
-      <div className=tour-foreground>
-        <div key={section} className=tour-section-root>
+      <div className="tour-foreground">
+        <div key={section} className="tour-section-root">
           {section === 'hero' ? (
             <HeroSection
               tourStep={step}

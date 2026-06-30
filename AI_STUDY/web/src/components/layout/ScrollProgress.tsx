@@ -10,7 +10,7 @@ export function ScrollProgress() {
 
   return (
     <motion.div
-      className=scroll-progress
+      className="scroll-progress"
       style={{ scaleX }}
       aria-hidden
     />

@@ -30,6 +30,7 @@ import {
   predictRisk,
   simulateTwin,
 } from '../features/ai/pipeline'
+import './AiWorkspace.css'
 
 type Props = {
   onBack: () => void
@@ -269,15 +270,15 @@ export function AiWorkspacePage({ onBack }: Props) {
     title: string
     items: Array<{ term: string; meaning: string; tip?: string }>
   }) => (
-    <aside className=ai-help aria-label={`${title} 도움말`}>
-      <p className=ai-help-kicker>Guide</p>
-      <h3 className=ai-help-title>{title}</h3>
-      <dl className=ai-help-list>
+    <aside className="ai-help" aria-label={`${title} 도움말`}>
+      <p className="ai-help-kicker">Guide</p>
+      <h3 className="ai-help-title">{title}</h3>
+      <dl className="ai-help-list">
         {items.map((it) => (
-          <div key={it.term} className=ai-help-item>
-            <dt className=ai-help-term>{it.term}</dt>
-            <dd className=ai-help-meaning>{it.meaning}</dd>
-            {it.tip ? <dd className=ai-help-tip>{it.tip}</dd> : null}
+          <div key={it.term} className="ai-help-item">
+            <dt className="ai-help-term">{it.term}</dt>
+            <dd className="ai-help-meaning">{it.meaning}</dd>
+            {it.tip ? <dd className="ai-help-tip">{it.tip}</dd> : null}
           </div>
         ))}
       </dl>
@@ -297,21 +298,21 @@ export function AiWorkspacePage({ onBack }: Props) {
       severity?: 'info' | 'warn' | 'error' | 'ok'
     }>
   }) => (
-    <section className=ai-codepanel aria-label={title}>
-      <header className=ai-codepanel-head>
-        <span className=ai-codepanel-title>{title}</span>
+    <section className="ai-codepanel" aria-label={title}>
+      <header className="ai-codepanel-head">
+        <span className="ai-codepanel-title">{title}</span>
       </header>
-      <div className=ai-code>
+      <div className="ai-code">
         {lines.map((l, idx) => (
           <div key={`${l.key}-${idx}`} className={`ai-codeline ai-codeline--${l.severity ?? 'info'}`}>
-            <span className=ai-lno>{String(idx + 1).padStart(2, '0')}</span>
-            <span className=ai-key>{l.key}</span>
-            <span className=ai-colon>:</span>
-            <span className=ai-val>
+            <span className="ai-lno">{String(idx + 1).padStart(2, '0')}</span>
+            <span className="ai-key">{l.key}</span>
+            <span className="ai-colon">:</span>
+            <span className="ai-val">
               {l.value}
-              {l.unit ? <span className=ai-unit> {l.unit}</span> : null}
+              {l.unit ? <span className="ai-unit"> {l.unit}</span> : null}
             </span>
-            {l.note ? <span className=ai-note> // {l.note}</span> : null}
+            {l.note ? <span className="ai-note"> // {l.note}</span> : null}
           </div>
         ))}
       </div>
@@ -819,9 +820,9 @@ export function AiWorkspacePage({ onBack }: Props) {
     const v = apiStatus[k]
     const label = v === 'live' ? 'LIVE' : v === 'local' ? 'LOCAL' : v === 'error' ? 'ERR' : '미호출'
     return (
-      <div className=ai-stack-api-status>
+      <div className="ai-stack-api-status">
         <span className={`ai-badge ai-badge--${v}`}>{label}</span>
-        <span className=ai-stack-api-status-hint>{stackStatusHint(v)}</span>
+        <span className="ai-stack-api-status-hint">{stackStatusHint(v)}</span>
       </div>
     )
   }
@@ -1017,28 +1018,28 @@ export function AiWorkspacePage({ onBack }: Props) {
   }
 
   return (
-    <div className=ai-page ai2>
-      <div className=ai-shell>
-        <header className=ai-topbar>
-          <div className=ai-topbar-left>
+    <div className="ai-page ai-ws">
+      <div className="ai-shell">
+        <header className="ai-topbar">
+          <div className="ai-topbar-left">
             <button
-              type=button
-              className=ai-topbar-iconbtn
+              type="button"
+              className="ai-topbar-iconbtn"
               onClick={() => setNavOpen((v) => !v)}
               aria-label={navOpen ? '메뉴 닫기' : '메뉴 열기'}
               aria-expanded={navOpen}
             >
               ☰
             </button>
-            <div className=ai-topbar-titlewrap>
-              <p className=ai-topbar-kicker>AI Workspace</p>
-              <h1 className=ai-topbar-title>Class Orbit</h1>
+            <div className="ai-topbar-titlewrap">
+              <p className="ai-topbar-kicker">AI Workspace</p>
+              <h1 className="ai-topbar-title">Class Orbit</h1>
             </div>
           </div>
-          <div className=ai-topbar-right>
+          <div className="ai-topbar-right">
             <span
-              className=ai-topbar-apihint
-              title=Vite 환경변수 VITE_API_BASE_URL (비어 있으면 현재 오리진으로 /api 호출)
+              className="ai-topbar-apihint"
+              title="Vite 환경변수 VITE_API_BASE_URL (비어 있으면 현재 오리진으로 /api 호출)"
             >
               {import.meta.env.VITE_API_BASE_URL?.trim()
                 ? `API ${import.meta.env.VITE_API_BASE_URL.trim()}`
@@ -1046,23 +1047,23 @@ export function AiWorkspacePage({ onBack }: Props) {
             </span>
             {tab === 'chat' ? (
               <>
-                <ApiBadge k=chat />
-                <span className=ai-topbar-meta>messages: {historyCount}</span>
+                <ApiBadge k="chat" />
+                <span className="ai-topbar-meta">messages: {historyCount}</span>
               </>
             ) : null}
-            <button type=button className=ai-topbar-btn onClick={onBack}>
-              메인으로
+            <button type="button" className="ai-topbar-btn" onClick={onBack}>
+              ← 메인
             </button>
           </div>
         </header>
 
         <div className={`ai-layout${navOpen ? ' is-nav-open' : ''}`}>
-          <aside className=ai-nav aria-label=AI 메뉴>
-            <nav className=ai-nav-list aria-label=탭>
+          <aside className="ai-nav" aria-label="AI 메뉴">
+            <nav className="ai-nav-list" aria-label="탭">
               {(Object.keys(TAB_LABELS) as AiTab[]).map((key) => (
                 <button
                   key={key}
-                  type=button
+                  type="button"
                   className={`ai-nav-item${tab === key ? ' is-active' : ''}`}
                   onClick={() => {
                     setTab(key)
@@ -1075,16 +1076,38 @@ export function AiWorkspacePage({ onBack }: Props) {
             </nav>
           </aside>
 
-          <main className=ai-content aria-label={`${TAB_LABELS[tab]} 화면`}>
+          <main className={`ai-content${tab === 'chat' ? ' ai-content--chat' : ''}`} aria-label={`${TAB_LABELS[tab]} 화면`}>
 
           {tab === 'overview' ? (
-            <section className=ai-board ai-board--overview>
-              <article className=ai-card ai-card--hero>
-                <p className=ai-card-kicker>Today</p>
-                <h2>한 눈에 보는 요약</h2>
-                <p>핵심 지표만 먼저 보고, 필요한 화면으로 이동하세요.</p>
+            <section className="ai-board ai-board--overview">
+              <article className="ai-overview">
+                <header className="ai-overview__head">
+                  <p className="ai-overview__kicker">Today</p>
+                  <h2 className="ai-overview__title">한 눈에 보는 요약</h2>
+                  <p className="ai-overview__lead">
+                    핵심 지표만 먼저 보고, 필요한 화면으로 이동하세요.
+                  </p>
+                </header>
 
-                <div className=ai-overview-actions aria-label=빠른 이동>
+                <div className="ai-overview__stats" aria-label="핵심 지표">
+                  <div className="ai-overview__stat">
+                    <span className="ai-overview__stat-label">Quality</span>
+                    <span className="ai-overview__stat-value">{classResult.qualityScore}</span>
+                    <span className="ai-overview__stat-hint">/ 100</span>
+                  </div>
+                  <div className="ai-overview__stat">
+                    <span className="ai-overview__stat-label">Risk</span>
+                    <span className="ai-overview__stat-value">{riskResult.subjectRisk}%</span>
+                    <span className="ai-overview__stat-hint">overall</span>
+                  </div>
+                  <div className="ai-overview__stat">
+                    <span className="ai-overview__stat-label">Study</span>
+                    <span className="ai-overview__stat-value">{scheduleResult.effectiveHours}</span>
+                    <span className="ai-overview__stat-hint">hrs / day</span>
+                  </div>
+                </div>
+
+                <div className="ai-chip-row" aria-label="빠른 이동">
                   {(
                     [
                       ['class-analysis', '수업 분석'],
@@ -1096,8 +1119,8 @@ export function AiWorkspacePage({ onBack }: Props) {
                   ).map(([k, label]) => (
                     <button
                       key={k}
-                      type=button
-                      className=ai-overview-btn
+                      type="button"
+                      className="ai-chip"
                       onClick={() => setTab(k)}
                     >
                       {label}
@@ -1105,22 +1128,22 @@ export function AiWorkspacePage({ onBack }: Props) {
                   ))}
                 </div>
 
-                <div className=ai-scenario-row aria-label=시나리오 저장 및 불러오기>
-                  <button type=button className=ai-overview-btn onClick={exportScenario}>
-                    시나리오 저장 (JSON)
+                <div className="ai-overview__tools" aria-label="시나리오 저장 및 불러오기">
+                  <button type="button" className="ai-chip ai-chip--soft" onClick={exportScenario}>
+                    시나리오 저장
                   </button>
                   <button
-                    type=button
-                    className=ai-overview-btn
+                    type="button"
+                    className="ai-chip ai-chip--soft"
                     onClick={() => scenarioFileRef.current?.click()}
                   >
-                    시나리오 불러오기
+                    불러오기
                   </button>
                   <input
                     ref={scenarioFileRef}
-                    type=file
-                    accept=application/json,.json
-                    className=ai-file-input-hidden
+                    type="file"
+                    accept="application/json,.json"
+                    className="ai-file-input-hidden"
                     aria-hidden
                     onChange={async (e) => {
                       const f = e.target.files?.[0]
@@ -1136,118 +1159,99 @@ export function AiWorkspacePage({ onBack }: Props) {
                     }}
                   />
                 </div>
+
                 {scenarioImportError ? (
-                  <p className=ai-error-text role=alert>
+                  <p className="ai-error-text" role="alert">
                     {scenarioImportError}
                   </p>
                 ) : null}
-
-                <div className=ai-result ai-result--flat>
-                  <div className=ai-metrics>
-                    <div className=ai-metric>
-                      <span className=ai-metric-kicker>Quality</span>
-                      <span className=ai-metric-num>{classResult.qualityScore}</span>
-                      <span className=ai-metric-unit>/100</span>
-                    </div>
-                    <div className=ai-metric>
-                      <span className=ai-metric-kicker>Risk</span>
-                      <span className=ai-metric-num>{riskResult.subjectRisk}%</span>
-                      <span className=ai-metric-unit>overall</span>
-                    </div>
-                    <div className=ai-metric>
-                      <span className=ai-metric-kicker>Study</span>
-                      <span className=ai-metric-num>{scheduleResult.effectiveHours}</span>
-                      <span className=ai-metric-unit>hrs/day</span>
-                    </div>
-                  </div>
-                </div>
               </article>
             </section>
           ) : null}
 
           {tab === 'class-analysis' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>1) 수업 분석 (Teacher Analytics)</h2>
-              <div className=ai-split>
-                <div className=ai-split-main>
-                  <div className=ai-grid2>
-                    <label className=ai-field>
+              <div className="ai-split">
+                <div className="ai-split-main">
+                  <div className="ai-grid2">
+                    <label className="ai-set">
                       수업 시간(분)
-                      <span className=ai-field-help>45분, 50분 등 실제 수업 길이를 입력하세요.</span>
+                      <span className="ai-set__hint">45분, 50분 등 실제 수업 길이를 입력하세요.</span>
                       <input
-                        type=number
+                        type="number"
                         value={classDurationMinutes}
                         onChange={(e) => setClassDurationMinutes(Number(e.target.value))}
                       />
                     </label>
                   </div>
-                  <label className=ai-field>
+                  <label className="ai-set">
                     수업 텍스트/전사본
-                    <span className=ai-field-help>
+                    <span className="ai-set__hint">
                       텍스트만 넣어도 자동으로 문장/질문/반복을 추정해서 입력값을 채웁니다.
                     </span>
-                    <div className=ai-stt-row aria-label=음성 전사>
+                    <div className="ai-stt-row" aria-label="음성 전사">
                       <input
-                        className=ai-file
-                        type=file
-                        accept=audio/*
+                        className="ai-file ai-ctrl"
+                        type="file"
+                        accept="audio/*"
                         onChange={(e) => setAudioFile(e.target.files?.[0] ?? null)}
                       />
                       <button
-                        type=button
-                        className=ai-send-btn ai-send-btn--ghost
+                        type="button"
+                        className="ai-send-btn ai-send-btn--ghost"
                         onClick={handleTranscribe}
                         disabled={!audioFile || sttLoading}
                       >
                         {sttLoading ? '전사 중...' : '음성→텍스트'}
                       </button>
-                      <ApiBadge k=stt />
+                      <ApiBadge k="stt" />
                     </div>
-                    {sttError ? <p className=ai-error-text>{sttError}</p> : null}
+                    {sttError ? <p className="ai-error-text">{sttError}</p> : null}
                     <textarea
-                      className=ai-input ai-input--transcript
+                      className="ai-input ai-input--transcript ai-ctrl"
                       value={transcriptText}
                       onChange={(e) => setTranscriptText(e.target.value)}
                       rows={5}
                     />
                   </label>
-                  <div className=ai-inline-actions>
-                    <div className=ai-action-pair>
-                      <button type=button className=ai-send-btn onClick={handleAutoClassAnalysis}>
+                  <div className="ai-inline-actions">
+                    <div className="ai-action-pair">
+                      <button type="button" className="ai-send-btn" onClick={handleAutoClassAnalysis}>
                         자동 분석
                       </button>
-                      <ApiBadge k=class_from_text />
+                      <ApiBadge k="class_from_text" />
                     </div>
-                    <div className=ai-action-pair>
+                    <div className="ai-action-pair">
                       <button
-                        type=button
-                        className=ai-send-btn ai-send-btn--ghost
+                        type="button"
+                        className="ai-send-btn ai-send-btn--ghost"
                         onClick={handleRunFullPipeline}
                       >
                         전체 파이프라인 실행
                       </button>
-                      <ApiBadge k=pipeline_run />
+                      <ApiBadge k="pipeline_run" />
                     </div>
                   </div>
-                  <div className=ai-result>
-                    <p className=ai-mini-kicker>시간대별 구조 (설명/질문/잡담)</p>
-                    <div className=ai-timeline aria-label=시간대별 비율>
+                  <div className="ai-result">
+                    <p className="ai-mini-kicker">시간대별 구조 (설명/질문/잡담)</p>
+                    <div className="ai-timeline" aria-label="시간대별 비율">
                       {timeline.rows.map((r) => {
                         const total = Math.max(r.total, 1)
                         const explainPct = Math.round((r.explain / total) * 100)
                         const questionPct = Math.round((r.question / total) * 100)
                         const chitchatPct = Math.max(0, 100 - explainPct - questionPct)
                         return (
-                          <div key={`${r.minuteStart}-${r.minuteEnd}`} className=ai-tl-row>
-                            <span className=ai-tl-label>
+                          <div key={`${r.minuteStart}-${r.minuteEnd}`} className="ai-tl-row">
+                            <span className="ai-tl-label">
                               {r.minuteStart}–{r.minuteEnd}m
                             </span>
-                            <div className=ai-tl-bar role=img aria-label=stacked bar>
-                              <span className=ai-tl-seg ai-tl-seg--explain style={{ width: `${explainPct}%` }} />
-                              <span className=ai-tl-seg ai-tl-seg--question style={{ width: `${questionPct}%` }} />
-                              <span className=ai-tl-seg ai-tl-seg--chat style={{ width: `${chitchatPct}%` }} />
+                            <div className="ai-tl-bar" role="img" aria-label="stacked bar">
+                              <span className="ai-tl-seg ai-tl-seg--explain" style={{ width: `${explainPct}%` }} />
+                              <span className="ai-tl-seg ai-tl-seg--question" style={{ width: `${questionPct}%` }} />
+                              <span className="ai-tl-seg ai-tl-seg--chat" style={{ width: `${chitchatPct}%` }} />
                             </div>
-                            <span className=ai-tl-meta>
+                            <span className="ai-tl-meta">
                               E {explainPct}%, Q {questionPct}%
                             </span>
                           </div>
@@ -1255,7 +1259,7 @@ export function AiWorkspacePage({ onBack }: Props) {
                       })}
                     </div>
                     <CodeLines
-                      title=teacher_analytics.summary
+                      title="teacher_analytics.summary"
                       lines={[
                         {
                           key: 'duration_minutes',
@@ -1286,66 +1290,66 @@ export function AiWorkspacePage({ onBack }: Props) {
                       ]}
                     />
                   </div>
-                  <div className=ai-grid2>
-                    <label className=ai-field>
+                  <div className="ai-grid2">
+                    <label className="ai-set">
                       transcript length
-                      <span className=ai-field-help>
+                      <span className="ai-set__hint">
                         전사 텍스트 길이(대략적). 길수록 안정적인 추정이 됩니다.
                       </span>
                       <input
-                        type=number
+                        type="number"
                         value={classInput.transcriptLength}
                         onChange={(e) =>
                           setClassInput((p) => ({ ...p, transcriptLength: Number(e.target.value) }))
                         }
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       explanation focus %
-                      <span className=ai-field-help>
+                      <span className="ai-set__hint">
                         설명(개념/풀이) 중심 비율. 높을수록 “잡담 대비 설명”이 많습니다.
                       </span>
                       <input
-                        type=number
+                        type="number"
                         value={classInput.explanationFocus}
                         onChange={(e) =>
                           setClassInput((p) => ({ ...p, explanationFocus: Number(e.target.value) }))
                         }
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       repetition count
-                      <span className=ai-field-help>
+                      <span className="ai-set__hint">
                         반복 문장/패턴 수. 너무 높으면 비효율, 너무 낮으면 강조 부족일 수 있습니다.
                       </span>
                       <input
-                        type=number
+                        type="number"
                         value={classInput.repetitionCount}
                         onChange={(e) =>
                           setClassInput((p) => ({ ...p, repetitionCount: Number(e.target.value) }))
                         }
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       question prompt %
-                      <span className=ai-field-help>
+                      <span className="ai-set__hint">
                         질문 유도/확인 질문 비율. 상호작용이 높을수록 이해 확인에 유리합니다.
                       </span>
                       <input
-                        type=number
+                        type="number"
                         value={classInput.questionPromptRate}
                         onChange={(e) =>
                           setClassInput((p) => ({ ...p, questionPromptRate: Number(e.target.value) }))
                         }
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       keyword density %
-                      <span className=ai-field-help>
+                      <span className="ai-set__hint">
                         핵심 키워드 등장 밀도. 너무 높으면 과밀, 너무 낮으면 핵심이 흐려질 수 있습니다.
                       </span>
                       <input
-                        type=number
+                        type="number"
                         value={classInput.keywordDensity}
                         onChange={(e) =>
                           setClassInput((p) => ({ ...p, keywordDensity: Number(e.target.value) }))
@@ -1353,9 +1357,9 @@ export function AiWorkspacePage({ onBack }: Props) {
                       />
                     </label>
                   </div>
-                  <div className=ai-result>
+                  <div className="ai-result">
                     <CodeLines
-                      title=teacher_analytics.metrics
+                      title="teacher_analytics.metrics"
                       lines={[
                         {
                           key: 'quality_score',
@@ -1396,33 +1400,33 @@ export function AiWorkspacePage({ onBack }: Props) {
                       ]}
                     />
 
-                    <div className=ai-chart-bars aria-label=Class charts>
-                      <div className=ai-bar-row>
-                        <span className=ai-bar-label>Quality</span>
-                        <div className=ai-bar-track>
-                          <div className=ai-bar-fill style={{ width: `${classResult.qualityScore}%` }} />
+                    <div className="ai-chart-bars" aria-label="Class charts">
+                      <div className="ai-bar-row">
+                        <span className="ai-bar-label">Quality</span>
+                        <div className="ai-bar-track">
+                          <div className="ai-bar-fill" style={{ width: `${classResult.qualityScore}%` }} />
                         </div>
-                        <span className=ai-bar-value>{classResult.qualityScore}/100</span>
+                        <span className="ai-bar-value">{classResult.qualityScore}/100</span>
                       </div>
 
-                      <div className=ai-bar-row>
-                        <span className=ai-bar-label>Explanation</span>
-                        <div className=ai-bar-track>
-                          <div className=ai-bar-fill style={{ width: `${classResult.explanationRatio}%` }} />
+                      <div className="ai-bar-row">
+                        <span className="ai-bar-label">Explanation</span>
+                        <div className="ai-bar-track">
+                          <div className="ai-bar-fill" style={{ width: `${classResult.explanationRatio}%` }} />
                         </div>
-                        <span className=ai-bar-value>{classResult.explanationRatio}%</span>
+                        <span className="ai-bar-value">{classResult.explanationRatio}%</span>
                       </div>
                     </div>
 
-                    <div className=ai-metric-feedback>
-                      <span className=ai-metric-kicker>Feedback</span>
-                      <p className=ai-metric-text>{classResult.feedback}</p>
+                    <div className="ai-metric-feedback">
+                      <span className="ai-metric-kicker">Feedback</span>
+                      <p className="ai-metric-text">{classResult.feedback}</p>
                     </div>
                   </div>
                 </div>
 
                 <HelpPanel
-                  title=수업 분석 지표 해석
+                  title="수업 분석 지표 해석"
                   items={[
                     {
                       term: 'Quality (/100)',
@@ -1452,22 +1456,22 @@ export function AiWorkspacePage({ onBack }: Props) {
           ) : null}
 
           {tab === 'risk' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>2) 학습 격차 예측 모델</h2>
-              <div className=ai-split>
-                <div className=ai-split-main>
-                  <div className=ai-result>
-                    <p className=ai-mini-kicker>과목 구성</p>
-                    <div className=ai-subject-toolbar>
+              <div className="ai-split">
+                <div className="ai-split-main">
+                  <div className="ai-result">
+                    <p className="ai-mini-kicker">과목 구성</p>
+                    <div className="ai-subject-toolbar">
                       <input
-                        className=ai-inline-input
-                        placeholder=과목 추가 (예: 물리, 화학, 일본어...)
+                        className="ai-inline-input ai-ctrl"
+                        placeholder="과목 추가 (예: 물리, 화학, 일본어...)"
                         value={newSubjectName}
                         onChange={(e) => setNewSubjectName(e.target.value)}
                       />
                       <button
-                        type=button
-                        className=ai-send-btn ai-send-btn--ghost
+                        type="button"
+                        className="ai-send-btn ai-send-btn--ghost"
                         onClick={() => {
                           const name = newSubjectName.trim()
                           if (!name) return
@@ -1482,25 +1486,25 @@ export function AiWorkspacePage({ onBack }: Props) {
                         추가
                       </button>
                     </div>
-                    <div className=ai-subject-grid>
+                    <div className="ai-subject-grid">
                       {subjects.map((s) => (
-                        <div key={s.id} className=ai-subject-card>
-                          <div className=ai-subject-head>
-                            <span className=ai-subject-name>{s.name}</span>
+                        <div key={s.id} className="ai-subject-card">
+                          <div className="ai-subject-head">
+                            <span className="ai-subject-name">{s.name}</span>
                             <button
-                              type=button
-                              className=ai-xbtn
+                              type="button"
+                              className="ai-xbtn"
                               onClick={() => setSubjects((p) => p.filter((x) => x.id !== s.id))}
-                              aria-label=과목 삭제
-                              title=삭제
+                              aria-label="과목 삭제"
+                              title="삭제"
                             >
                               ×
                             </button>
                           </div>
-                          <label className=ai-field>
+                          <label className="ai-set">
                             성적(0~100)
                             <input
-                              type=number
+                              type="number"
                               value={s.score}
                               onChange={(e) => {
                                 const v = Number(e.target.value)
@@ -1508,11 +1512,11 @@ export function AiWorkspacePage({ onBack }: Props) {
                               }}
                             />
                           </label>
-                          <label className=ai-field>
+                          <label className="ai-set">
                             중요도(0.5~1.5)
                             <input
-                              type=number
-                              step=0.05
+                              type="number"
+                              step="0.05"
                               value={s.importance}
                               onChange={(e) => {
                                 const v = Number(e.target.value)
@@ -1524,39 +1528,39 @@ export function AiWorkspacePage({ onBack }: Props) {
                       ))}
                     </div>
                   </div>
-                  <div className=ai-grid2>
-                    <label className=ai-field>
+                  <div className="ai-grid2">
+                    <label className="ai-set">
                       평균 성적
-                      <span className=ai-field-help>최근 성적의 평균(0~100). 낮을수록 위험도가 올라갑니다.</span>
+                      <span className="ai-set__hint">최근 성적의 평균(0~100). 낮을수록 위험도가 올라갑니다.</span>
                       <input
-                        type=number
+                        type="number"
                         value={riskInput.averageScore}
                         onChange={(e) => setRiskInput((p) => ({ ...p, averageScore: Number(e.target.value) }))}
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       출결률
-                      <span className=ai-field-help>출석률(0~100). 낮을수록 학습 리스크가 증가합니다.</span>
+                      <span className="ai-set__hint">출석률(0~100). 낮을수록 학습 리스크가 증가합니다.</span>
                       <input
-                        type=number
+                        type="number"
                         value={riskInput.attendanceRate}
                         onChange={(e) => setRiskInput((p) => ({ ...p, attendanceRate: Number(e.target.value) }))}
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       수업 품질 점수
-                      <span className=ai-field-help>수업 분석에서 나온 품질 점수(0~100). 낮을수록 위험도가 올라갑니다.</span>
+                      <span className="ai-set__hint">수업 분석에서 나온 품질 점수(0~100). 낮을수록 위험도가 올라갑니다.</span>
                       <input
-                        type=number
+                        type="number"
                         value={riskInput.classQualityScore}
                         onChange={(e) => setRiskInput((p) => ({ ...p, classQualityScore: Number(e.target.value) }))}
                       />
                     </label>
-                    <label className=ai-field>
+                    <label className="ai-set">
                       학교 환경 점수
-                      <span className=ai-field-help>학습 환경/지원 정도(0~100). 낮을수록 위험도가 올라갑니다.</span>
+                      <span className="ai-set__hint">학습 환경/지원 정도(0~100). 낮을수록 위험도가 올라갑니다.</span>
                       <input
-                        type=number
+                        type="number"
                         value={riskInput.schoolEnvironmentScore}
                         onChange={(e) =>
                           setRiskInput((p) => ({ ...p, schoolEnvironmentScore: Number(e.target.value) }))
@@ -1565,9 +1569,9 @@ export function AiWorkspacePage({ onBack }: Props) {
                     </label>
                   </div>
 
-                  <div className=ai-result>
+                  <div className="ai-result">
                     <CodeLines
-                      title=risk_prediction.summary
+                      title="risk_prediction.summary"
                       lines={[
                         {
                           key: 'overall_risk',
@@ -1601,40 +1605,40 @@ export function AiWorkspacePage({ onBack }: Props) {
                       ]}
                     />
 
-                    <div className=ai-chart-bars aria-label=Risk charts>
-                      <p className=ai-mini-kicker>과목별 위험도</p>
-                      <div className=ai-risk-list role=list>
+                    <div className="ai-chart-bars" aria-label="Risk charts">
+                      <p className="ai-mini-kicker">과목별 위험도</p>
+                      <div className="ai-risk-list" role="list">
                         {subjectRisks.list.map((s) => (
-                          <div key={s.id} className=ai-risk-row role=listitem>
-                            <span className=ai-risk-name>{s.name}</span>
-                            <div className=ai-bar-track>
-                              <div className=ai-bar-fill style={{ width: `${s.risk}%` }} />
+                          <div key={s.id} className="ai-risk-row" role="listitem">
+                            <span className="ai-risk-name">{s.name}</span>
+                            <div className="ai-bar-track">
+                              <div className="ai-bar-fill" style={{ width: `${s.risk}%` }} />
                             </div>
-                            <span className=ai-risk-val>{s.risk}%</span>
+                            <span className="ai-risk-val">{s.risk}%</span>
                           </div>
                         ))}
                       </div>
-                      <div className=ai-bar-row>
-                        <span className=ai-bar-label>Risk</span>
-                        <div className=ai-bar-track>
-                          <div className=ai-bar-fill style={{ width: `${riskResult.subjectRisk}%` }} />
+                      <div className="ai-bar-row">
+                        <span className="ai-bar-label">Risk</span>
+                        <div className="ai-bar-track">
+                          <div className="ai-bar-fill" style={{ width: `${riskResult.subjectRisk}%` }} />
                         </div>
-                        <span className=ai-bar-value>{riskResult.subjectRisk}%</span>
+                        <span className="ai-bar-value">{riskResult.subjectRisk}%</span>
                       </div>
 
-                      <div className=ai-bar-row>
-                        <span className=ai-bar-label>Dropout</span>
-                        <div className=ai-bar-track>
-                          <div className=ai-bar-fill style={{ width: `${riskResult.dropoutProbability}%` }} />
+                      <div className="ai-bar-row">
+                        <span className="ai-bar-label">Dropout</span>
+                        <div className="ai-bar-track">
+                          <div className="ai-bar-fill" style={{ width: `${riskResult.dropoutProbability}%` }} />
                         </div>
-                        <span className=ai-bar-value>{riskResult.dropoutProbability}%</span>
+                        <span className="ai-bar-value">{riskResult.dropoutProbability}%</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <HelpPanel
-                  title=격차/탈락 리스크 해석
+                  title="격차/탈락 리스크 해석"
                   items={[
                     {
                       term: 'Risk (%)',
@@ -1657,9 +1661,9 @@ export function AiWorkspacePage({ onBack }: Props) {
           ) : null}
 
           {tab === 'schedule' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>3) 시간표 최적화 AI (강화학습 구조)</h2>
-              <div className=ai-grid2>
+              <div className="ai-grid2">
                 {(
                   [
                     ['koreanLevel', '국어 이해도'],
@@ -1668,10 +1672,10 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ['fatigue', '피로도'],
                   ] as const
                 ).map(([key, label]) => (
-                  <label key={key} className=ai-field>
+                  <label key={key} className="ai-set">
                     {label}
                     <input
-                      type=number
+                      type="number"
                       value={scheduleInput[key]}
                       onChange={(e) =>
                         setScheduleInput((p) => ({ ...p, [key]: Number(e.target.value) }))
@@ -1679,11 +1683,11 @@ export function AiWorkspacePage({ onBack }: Props) {
                     />
                   </label>
                 ))}
-                <label className=ai-field>
+                <label className="ai-set">
                   주간 학습 가능 시간
                   <input
-                    type=number
-                    step=0.5
+                    type="number"
+                    step="0.5"
                     value={scheduleInput.studyHours}
                     onChange={(e) =>
                       setScheduleInput((p) => ({ ...p, studyHours: Number(e.target.value) }))
@@ -1691,24 +1695,24 @@ export function AiWorkspacePage({ onBack }: Props) {
                   />
                 </label>
               </div>
-              <div className=ai-result>
-                <div className=ai-metrics>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Effective hours</span>
-                    <span className=ai-metric-num>{scheduleResult.effectiveHours}h</span>
-                    <span className=ai-metric-unit>this week</span>
+              <div className="ai-result">
+                <div className="ai-metrics">
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Effective hours</span>
+                    <span className="ai-metric-num">{scheduleResult.effectiveHours}h</span>
+                    <span className="ai-metric-unit">this week</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Fatigue</span>
-                    <span className=ai-metric-num>{scheduleInput.fatigue}</span>
-                    <span className=ai-metric-unit>level</span>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Fatigue</span>
+                    <span className="ai-metric-num">{scheduleInput.fatigue}</span>
+                    <span className="ai-metric-unit">level</span>
                   </div>
                 </div>
 
-                <div className=ai-metric-feedback>
-                  <span className=ai-metric-kicker>Routine</span>
+                <div className="ai-metric-feedback">
+                  <span className="ai-metric-kicker">Routine</span>
                   {scheduleResult.routine.map((line) => (
-                    <p key={line} className=ai-metric-text>
+                    <p key={line} className="ai-metric-text">
                       - {line}
                     </p>
                   ))}
@@ -1718,9 +1722,9 @@ export function AiWorkspacePage({ onBack }: Props) {
           ) : null}
 
           {tab === 'twin' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>4) 학습 디지털 트윈</h2>
-              <div className=ai-grid2>
+              <div className="ai-grid2">
                 {(
                   [
                     ['currentAverage', '현재 평균'],
@@ -1729,10 +1733,10 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ['weeks', '시뮬레이션 주차'],
                   ] as const
                 ).map(([key, label]) => (
-                  <label key={key} className=ai-field>
+                  <label key={key} className="ai-set">
                     {label}
                     <input
-                      type=number
+                      type="number"
                       value={twinInput[key]}
                       onChange={(e) =>
                         setTwinInput((p) => ({ ...p, [key]: Number(e.target.value) }))
@@ -1741,34 +1745,34 @@ export function AiWorkspacePage({ onBack }: Props) {
                   </label>
                 ))}
               </div>
-              <div className=ai-result>
-                <div className=ai-metrics>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Predicted</span>
-                    <span className=ai-metric-num>{twinResult.predictedAverage}</span>
-                    <span className=ai-metric-unit>avg</span>
+              <div className="ai-result">
+                <div className="ai-metrics">
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Predicted</span>
+                    <span className="ai-metric-num">{twinResult.predictedAverage}</span>
+                    <span className="ai-metric-unit">avg</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Delta</span>
-                    <span className=ai-metric-num>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Delta</span>
+                    <span className="ai-metric-num">
                       {twinResult.delta > 0 ? `+${twinResult.delta}` : twinResult.delta}
                     </span>
-                    <span className=ai-metric-unit>change</span>
+                    <span className="ai-metric-unit">change</span>
                   </div>
                 </div>
 
-                <div className=ai-metric-feedback>
-                  <span className=ai-metric-kicker>Twin</span>
-                  <p className=ai-metric-text>{twinResult.comment}</p>
+                <div className="ai-metric-feedback">
+                  <span className="ai-metric-kicker">Twin</span>
+                  <p className="ai-metric-text">{twinResult.comment}</p>
                 </div>
               </div>
             </section>
           ) : null}
 
           {tab === 'causal' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>5) 인과 분석 모델 (Causal AI)</h2>
-              <div className=ai-grid2>
+              <div className="ai-grid2">
                 {(
                   [
                     ['attendanceImpact', '출결 영향도'],
@@ -1777,10 +1781,10 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ['environmentImpact', '환경 영향도'],
                   ] as const
                 ).map(([key, label]) => (
-                  <label key={key} className=ai-field>
+                  <label key={key} className="ai-set">
                     {label}
                     <input
-                      type=number
+                      type="number"
                       value={causalInput[key]}
                       onChange={(e) =>
                         setCausalInput((p) => ({ ...p, [key]: Number(e.target.value) }))
@@ -1789,32 +1793,32 @@ export function AiWorkspacePage({ onBack }: Props) {
                   </label>
                 ))}
               </div>
-              <div className=ai-result>
-                <div className=ai-metrics>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Top driver</span>
-                    <span className=ai-metric-num>{causalResult.topDriver}</span>
-                    <span className=ai-metric-unit>factor</span>
+              <div className="ai-result">
+                <div className="ai-metrics">
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Top driver</span>
+                    <span className="ai-metric-num">{causalResult.topDriver}</span>
+                    <span className="ai-metric-unit">factor</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Weight</span>
-                    <span className=ai-metric-num>{causalResult.topWeight}%</span>
-                    <span className=ai-metric-unit>relative</span>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Weight</span>
+                    <span className="ai-metric-num">{causalResult.topWeight}%</span>
+                    <span className="ai-metric-unit">relative</span>
                   </div>
                 </div>
 
-                <div className=ai-metric-feedback>
-                  <span className=ai-metric-kicker>Summary</span>
-                  <p className=ai-metric-text>{causalResult.summary}</p>
+                <div className="ai-metric-feedback">
+                  <span className="ai-metric-kicker">Summary</span>
+                  <p className="ai-metric-text">{causalResult.summary}</p>
                 </div>
               </div>
             </section>
           ) : null}
 
           {tab === 'xai' ? (
-            <section className=ai-detail>
+            <section className="ai-detail">
               <h2>6) 설명 가능한 AI (Explainable AI)</h2>
-              <div className=ai-grid2>
+              <div className="ai-grid2">
                 {(
                   [
                     ['attendance', '출결'],
@@ -1823,10 +1827,10 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ['classQuality', '수업 품질'],
                   ] as const
                 ).map(([key, label]) => (
-                  <label key={key} className=ai-field>
+                  <label key={key} className="ai-set">
                     {label}
                     <input
-                      type=number
+                      type="number"
                       value={xaiInput[key]}
                       onChange={(e) =>
                         setXaiInput((p) => ({ ...p, [key]: Number(e.target.value) }))
@@ -1835,27 +1839,27 @@ export function AiWorkspacePage({ onBack }: Props) {
                   </label>
                 ))}
               </div>
-              <div className=ai-result>
-                <div className=ai-metrics>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Attendance</span>
-                    <span className=ai-metric-num>{xaiResult.attendance}%</span>
-                    <span className=ai-metric-unit>impact</span>
+              <div className="ai-result">
+                <div className="ai-metrics">
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Attendance</span>
+                    <span className="ai-metric-num">{xaiResult.attendance}%</span>
+                    <span className="ai-metric-unit">impact</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Understanding</span>
-                    <span className=ai-metric-num>{xaiResult.understanding}%</span>
-                    <span className=ai-metric-unit>impact</span>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Understanding</span>
+                    <span className="ai-metric-num">{xaiResult.understanding}%</span>
+                    <span className="ai-metric-unit">impact</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Fatigue</span>
-                    <span className=ai-metric-num>{xaiResult.fatigue}%</span>
-                    <span className=ai-metric-unit>impact</span>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Fatigue</span>
+                    <span className="ai-metric-num">{xaiResult.fatigue}%</span>
+                    <span className="ai-metric-unit">impact</span>
                   </div>
-                  <div className=ai-metric>
-                    <span className=ai-metric-kicker>Class quality</span>
-                    <span className=ai-metric-num>{xaiResult.classQuality}%</span>
-                    <span className=ai-metric-unit>impact</span>
+                  <div className="ai-metric">
+                    <span className="ai-metric-kicker">Class quality</span>
+                    <span className="ai-metric-num">{xaiResult.classQuality}%</span>
+                    <span className="ai-metric-unit">impact</span>
                   </div>
                 </div>
               </div>
@@ -1863,27 +1867,27 @@ export function AiWorkspacePage({ onBack }: Props) {
           ) : null}
 
           {tab === 'stack' ? (
-            <section className=ai-detail ai-stack-page>
-              <header className=ai-stack-header>
-                <p className=ai-stack-eyebrow>학교 데이터</p>
+            <section className="ai-detail ai-stack-page">
+              <header className="ai-stack-header">
+                <p className="ai-stack-eyebrow">학교 데이터</p>
                 <h2>공공 API / 모델 연동</h2>
-                <p className=ai-stack-intro>
-                  <strong className=ai-stack-intro-strong>NEIS</strong>는 키와 학교 코드가 있으면 실데이터를
-                  불러옵니다. <strong className=ai-stack-intro-strong>KESS, 알리미, 모델</strong>은 데모용
+                <p className="ai-stack-intro">
+                  <strong className="ai-stack-intro-strong">NEIS</strong>는 키와 학교 코드가 있으면 실데이터를
+                  불러옵니다. <strong className="ai-stack-intro-strong">KESS, 알리미, 모델</strong>은 데모용
                   샘플 또는 시뮬레이션입니다. 전체 상태는{' '}
-                  <code className=ai-inline-code>GET /api/health</code> 로 확인할 수 있습니다.
+                  <code className="ai-inline-code">GET /api/health</code> 로 확인할 수 있습니다.
                 </p>
               </header>
 
-              <div className=ai-stack-card>
-                <div className=ai-stack-card-head>
-                  <span className=ai-stack-step>1</span>
+              <div className="ai-stack-card">
+                <div className="ai-stack-card-head">
+                  <span className="ai-stack-step">1</span>
                   <div>
-                    <h3 className=ai-stack-card-title>학교 찾기</h3>
-                    <p className=ai-stack-card-desc>급별로 검색한 뒤 목록에서 학교를 고릅니다.</p>
+                    <h3 className="ai-stack-card-title">학교 찾기</h3>
+                    <p className="ai-stack-card-desc">급별로 검색한 뒤 목록에서 학교를 고릅니다.</p>
                   </div>
                 </div>
-                <div className=ai-level-row aria-label=학교급 선택>
+                <div className="ai-level-row" aria-label="학교급 선택">
                   {(
                     [
                       ['high', '고등'],
@@ -1894,7 +1898,7 @@ export function AiWorkspacePage({ onBack }: Props) {
                   ).map(([lvl, label]) => (
                     <button
                       key={lvl}
-                      type=button
+                      type="button"
                       className={`ai-level-btn${schoolLevel === lvl ? ' is-active' : ''}`}
                       onClick={() => {
                         setSchoolLevel(lvl)
@@ -1905,10 +1909,10 @@ export function AiWorkspacePage({ onBack }: Props) {
                     </button>
                   ))}
                 </div>
-                <div className=ai-stack-search-row>
-                  <div className=ai-autocomplete-wrap ai-stack-search-input>
+                <div className="ai-stack-search-row">
+                  <div className="ai-autocomplete-wrap ai-stack-search-input">
                     <input
-                      className=ai-inline-input
+                      className="ai-inline-input ai-ctrl"
                       placeholder={`학교명 (${schoolLevelLabel(schoolLevel)}, 예: 서울${schoolLevelSuffix(schoolLevel)})`}
                       value={schoolQuery}
                       onChange={(e) => setSchoolQuery(e.target.value)}
@@ -1917,18 +1921,18 @@ export function AiWorkspacePage({ onBack }: Props) {
                     />
                     {schoolSuggestOpen ? (
                       schoolSearchLoading ? (
-                        <div className=ai-suggest-box>
-                          <button type=button className=ai-suggest-item disabled>
+                        <div className="ai-suggest-box">
+                          <button type="button" className="ai-suggest-item disabled">
                             검색 중...
                           </button>
                         </div>
                       ) : schoolResults.length > 0 ? (
-                        <div className=ai-suggest-box>
+                        <div className="ai-suggest-box">
                           {schoolResults.slice(0, 8).map((s) => (
                             <button
                               key={`${s.ATPT_OFCDC_SC_CODE}-${s.SD_SCHUL_CODE}`}
-                              type=button
-                              className=ai-suggest-item
+                              type="button"
+                              className="ai-suggest-item"
                               onMouseDown={(e) => e.preventDefault()}
                               onClick={() => {
                                 setSelectedSchool({
@@ -1941,7 +1945,7 @@ export function AiWorkspacePage({ onBack }: Props) {
                               }}
                             >
                               {s.SCHUL_NM}
-                              <span className=ai-suggest-sub>{s.ATPT_OFCDC_SC_NM}</span>
+                              <span className="ai-suggest-sub">{s.ATPT_OFCDC_SC_NM}</span>
                             </button>
                           ))}
                         </div>
@@ -1949,20 +1953,20 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ) : null}
                   </div>
                   <button
-                    type=button
-                    className=ai-send-btn ai-send-btn--ghost ai-stack-search-btn
+                    type="button"
+                    className="ai-send-btn ai-send-btn--ghost ai-stack-search-btn"
                     onClick={() => handleSearchSchools()}
                   >
                     검색 실행
                   </button>
                 </div>
                 {relatedChips.length > 0 && schoolQuery.trim().length >= 1 ? (
-                  <div className=ai-chip-row aria-label=연관검색어>
+                  <div className="ai-chip-row" aria-label="연관검색어">
                     {relatedChips.map((c) => (
                       <button
                         key={c}
-                        type=button
-                        className=ai-chip-btn
+                        type="button"
+                        className="ai-chip-btn"
                         onMouseDown={(e) => e.preventDefault()}
                         onClick={() => {
                           setSchoolQuery(c)
@@ -1975,15 +1979,15 @@ export function AiWorkspacePage({ onBack }: Props) {
                     ))}
                   </div>
                 ) : null}
-                {schoolSearchError ? <p className=ai-error-text>{schoolSearchError}</p> : null}
+                {schoolSearchError ? <p className="ai-error-text">{schoolSearchError}</p> : null}
                 {schoolResults.length > 0 ? (
-                  <div className=ai-stack-school-block>
-                    <p className=ai-stack-sublabel>검색 결과에서 선택</p>
-                    <div className=ai-school-list>
+                  <div className="ai-stack-school-block">
+                    <p className="ai-stack-sublabel">검색 결과에서 선택</p>
+                    <div className="ai-school-list">
                       {schoolResults.map((s) => (
                         <button
                           key={`${s.ATPT_OFCDC_SC_CODE}-${s.SD_SCHUL_CODE}`}
-                          type=button
+                          type="button"
                           className={`ai-school-btn${
                             selectedSchool?.atptCode === s.ATPT_OFCDC_SC_CODE &&
                             selectedSchool?.schoolCode === s.SD_SCHUL_CODE
@@ -2006,98 +2010,98 @@ export function AiWorkspacePage({ onBack }: Props) {
                 ) : null}
               </div>
 
-              <div className=ai-stack-card>
-                <div className=ai-stack-card-head>
-                  <span className=ai-stack-step>2</span>
+              <div className="ai-stack-card">
+                <div className="ai-stack-card-head">
+                  <span className="ai-stack-step">2</span>
                   <div>
-                    <h3 className=ai-stack-card-title>NEIS, 학교 정보</h3>
-                    <p className=ai-stack-card-desc>선택한 학교 기준으로 요약과 시간표를 가져옵니다.</p>
+                    <h3 className="ai-stack-card-title">NEIS, 학교 정보</h3>
+                    <p className="ai-stack-card-desc">선택한 학교 기준으로 요약과 시간표를 가져옵니다.</p>
                   </div>
                 </div>
-                <p className=ai-stack-legend role=note>
+                <p className="ai-stack-legend" role="note">
                   초록 <strong>LIVE</strong>는 &quot;그 API를 눌렀을 때 서버가 정상 응답&quot;이지, 버튼이
                   선택된 상태가 아닙니다. <strong>미호출</strong>이면 아직 그 줄을 실행하지 않은 것입니다.
                 </p>
-                <div className=ai-stack-actions>
-                  <div className=ai-stack-action>
-                    <button type=button className=ai-send-btn onClick={handleLoadPublicSummary}>
+                <div className="ai-stack-actions">
+                  <div className="ai-stack-action">
+                    <button type="button" className="ai-send-btn" onClick={handleLoadPublicSummary}>
                       학교 요약
                     </button>
-                    <StackApiBadge k=neis_summary />
+                    <StackApiBadge k="neis_summary" />
                   </div>
-                  <div className=ai-stack-action>
-                    <button type=button className=ai-send-btn ai-send-btn--ghost onClick={handleLoadTimetable}>
+                  <div className="ai-stack-action">
+                    <button type="button" className="ai-send-btn ai-send-btn--ghost" onClick={handleLoadTimetable}>
                       오늘 시간표
                     </button>
-                    <StackApiBadge k=neis_timetable />
+                    <StackApiBadge k="neis_timetable" />
                   </div>
                 </div>
               </div>
 
-              <div className=ai-stack-card>
-                <div className=ai-stack-card-head>
-                  <span className=ai-stack-step>3</span>
+              <div className="ai-stack-card">
+                <div className="ai-stack-card-head">
+                  <span className="ai-stack-step">3</span>
                   <div>
-                    <h3 className=ai-stack-card-title>통계, 환경 (샘플)</h3>
-                    <p className=ai-stack-card-desc>실연동 전 데모 응답입니다.</p>
+                    <h3 className="ai-stack-card-title">통계, 환경 (샘플)</h3>
+                    <p className="ai-stack-card-desc">실연동 전 데모 응답입니다.</p>
                   </div>
                 </div>
-                <div className=ai-stack-actions>
-                  <div className=ai-stack-action>
-                    <button type=button className=ai-send-btn ai-send-btn--ghost onClick={handleLoadKess}>
+                <div className="ai-stack-actions">
+                  <div className="ai-stack-action">
+                    <button type="button" className="ai-send-btn ai-send-btn--ghost" onClick={handleLoadKess}>
                       KESS 통계
                     </button>
-                    <StackApiBadge k=kess />
+                    <StackApiBadge k="kess" />
                   </div>
-                  <div className=ai-stack-action>
-                    <button type=button className=ai-send-btn ai-send-btn--ghost onClick={handleLoadAlimi}>
+                  <div className="ai-stack-action">
+                    <button type="button" className="ai-send-btn ai-send-btn--ghost" onClick={handleLoadAlimi}>
                       학교알리미 환경
                     </button>
-                    <StackApiBadge k=alimi />
+                    <StackApiBadge k="alimi" />
                   </div>
                 </div>
               </div>
 
-              <div className=ai-stack-card ai-stack-card--accent>
-                <div className=ai-stack-card-head>
-                  <span className=ai-stack-step>4</span>
+              <div className="ai-stack-card ai-stack-card--accent">
+                <div className="ai-stack-card-head">
+                  <span className="ai-stack-step">4</span>
                   <div>
-                    <h3 className=ai-stack-card-title>모델 파이프라인 (시뮬)</h3>
-                    <p className=ai-stack-card-desc>리스크, 시간표, 설명 API를 한 번에 호출합니다.</p>
+                    <h3 className="ai-stack-card-title">모델 파이프라인 (시뮬)</h3>
+                    <p className="ai-stack-card-desc">리스크, 시간표, 설명 API를 한 번에 호출합니다.</p>
                   </div>
                 </div>
-                <div className=ai-stack-model-run>
-                  <button type=button className=ai-send-btn ai-stack-model-btn onClick={handleRunModelApis}>
+                <div className="ai-stack-model-run">
+                  <button type="button" className="ai-send-btn ai-stack-model-btn" onClick={handleRunModelApis}>
                     sklearn / SB3 / SHAP 실행
                   </button>
-                  <div className=ai-stack-model-statuses aria-label=모델별 마지막 호출 상태>
-                    <div className=ai-stack-model-line>
-                      <span className=ai-stack-model-name>리스크 예측</span>
-                      <StackApiBadge k=sklearn />
+                  <div className="ai-stack-model-statuses" aria-label="모델별 마지막 호출 상태">
+                    <div className="ai-stack-model-line">
+                      <span className="ai-stack-model-name">리스크 예측</span>
+                      <StackApiBadge k="sklearn" />
                     </div>
-                    <div className=ai-stack-model-line>
-                      <span className=ai-stack-model-name>시간표 최적</span>
-                      <StackApiBadge k=sb3 />
+                    <div className="ai-stack-model-line">
+                      <span className="ai-stack-model-name">시간표 최적</span>
+                      <StackApiBadge k="sb3" />
                     </div>
-                    <div className=ai-stack-model-line>
-                      <span className=ai-stack-model-name>설명(SHAP)</span>
-                      <StackApiBadge k=shap />
+                    <div className="ai-stack-model-line">
+                      <span className="ai-stack-model-name">설명(SHAP)</span>
+                      <StackApiBadge k="shap" />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className=ai-stack-card ai-stack-card--footer>
-                <div className=ai-stack-selected>
-                  <span className=ai-stack-sublabel>선택된 학교</span>
-                  <p className=ai-stack-selected-value>
+              <div className="ai-stack-card ai-stack-card--footer">
+                <div className="ai-stack-selected">
+                  <span className="ai-stack-sublabel">선택된 학교</span>
+                  <p className="ai-stack-selected-value">
                     {selectedSchool
                       ? `${selectedSchool.schoolName}, ${selectedSchool.atptCode} / ${selectedSchool.schoolCode}`
                       : '학교를 먼저 선택하세요'}
                   </p>
                 </div>
                 <button
-                  type=button
+                  type="button"
                   className={`ai-overview-btn ai-stack-toggle${stackDetailsOpen ? ' is-open' : ''}`}
                   onClick={() => setStackDetailsOpen((v) => !v)}
                   aria-expanded={stackDetailsOpen}
@@ -2105,33 +2109,33 @@ export function AiWorkspacePage({ onBack }: Props) {
                   {stackDetailsOpen ? 'JSON 응답 접기' : 'JSON 응답 보기'}
                 </button>
                 {stackDetailsOpen ? (
-                  <div className=ai-stack-json>
+                  <div className="ai-stack-json">
                     <p>공공데이터 조회 결과:</p>
-                    <p className=ai-source-line>
+                    <p className="ai-source-line">
                       응답 출처: <strong>{neisSummarySource || '—'}</strong>
                     </p>
-                    <pre className=ai-pre>{publicSummary}</pre>
+                    <pre className="ai-pre">{publicSummary}</pre>
                     <p>시간표 조회 결과:</p>
-                    <p className=ai-source-line>
+                    <p className="ai-source-line">
                       응답 출처: <strong>{timetableSource || '—'}</strong>
                     </p>
-                    <pre className=ai-pre>{timetableText}</pre>
+                    <pre className="ai-pre">{timetableText}</pre>
                     <p>KESS(교육통계) 조회 결과:</p>
-                    <p className=ai-source-line>
+                    <p className="ai-source-line">
                       응답 출처: <strong>{kessSource || '—'}</strong>
                     </p>
-                    <pre className=ai-pre>{kessText}</pre>
+                    <pre className="ai-pre">{kessText}</pre>
                     <p>학교알리미(환경) 조회 결과:</p>
-                    <p className=ai-source-line>
+                    <p className="ai-source-line">
                       응답 출처: <strong>{alimiSource || '—'}</strong>
                     </p>
-                    <pre className=ai-pre>{alimiText}</pre>
+                    <pre className="ai-pre">{alimiText}</pre>
                     <p>Scikit-learn 예측 (시뮬레이션, 학습 모델 전까지 휴리스틱):</p>
-                    <pre className=ai-pre>{modelText}</pre>
+                    <pre className="ai-pre">{modelText}</pre>
                     <p>SB3 강화학습 최적화 (시뮬레이션, RL 정책 전까지 휴리스틱):</p>
-                    <pre className=ai-pre>{rlText}</pre>
+                    <pre className="ai-pre">{rlText}</pre>
                     <p>SHAP 설명 (시뮬레이션, shap 연동 전까지 근사치):</p>
-                    <pre className=ai-pre>{shapText}</pre>
+                    <pre className="ai-pre">{shapText}</pre>
                   </div>
                 ) : null}
               </div>
@@ -2140,30 +2144,30 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {tab === 'chat' ? (
             <>
-              <section className=ai-chat-log aria-live=polite>
+              <section className="ai-chat-log" aria-live="polite">
                 {messages.map((m, i) => (
                   <article key={`${m.role}-${i}`} className={`ai-msg ai-msg--${m.role}`}>
-                    <p className=ai-msg-role>{m.role === 'user' ? 'You' : 'AI'}</p>
-                    <p className=ai-msg-body>{m.content}</p>
+                    <p className="ai-msg-role">{m.role === 'user' ? 'You' : 'AI'}</p>
+                    <p className="ai-msg-body">{m.content}</p>
                   </article>
                 ))}
                 {loading ? (
-                  <article className=ai-msg ai-msg--assistant>
-                    <p className=ai-msg-role>AI</p>
-                    <p className=ai-msg-body>응답 생성 중...</p>
+                  <article className="ai-msg ai-msg--assistant">
+                    <p className="ai-msg-role">AI</p>
+                    <p className="ai-msg-body">응답 생성 중...</p>
                   </article>
                 ) : null}
               </section>
 
-              <form className=ai-chat-form onSubmit={handleSubmit}>
+              <form className="ai-chat-form" onSubmit={handleSubmit}>
                 <textarea
-                  className=ai-input
-                  placeholder=질문을 입력하세요. 예) 학생별 취약 과목 예측 로직 설명해줘
+                  className="ai-input ai-ctrl"
+                  placeholder="질문을 입력하세요. 예) 학생별 취약 과목 예측 로직 설명해줘"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   rows={3}
                 />
-                <button type=submit className=ai-send-btn disabled={!canSend}>
+                <button type="submit" className="ai-send-btn" disabled={!canSend}>
                   Send
                 </button>
               </form>
@@ -2172,55 +2176,55 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {/* ── 학습 경로 탭 ─────────────────────────── */}
           {tab === 'pathway' ? (
-            <div className=ai-panel-grid>
-              <section className=ai-panel>
-                <header className=ai-panel-head><span className=ai-panel-kicker>Learning Pathway</span><h2 className=ai-panel-title>학습 경로 엔진</h2></header>
-                <div className=ai-panel-body>
-                  <label className=ai-label>목표
-                    <select className=ai-select value={pathwayGoal} onChange={(e) => setPathwayGoal(e.target.value)}>
+            <div className="ai-panel-grid">
+              <section className="ai-panel">
+                <header className="ai-panel-head"><span className="ai-panel-kicker">Learning Pathway</span><h2 className="ai-panel-title">학습 경로 엔진</h2></header>
+                <div className="ai-panel-body">
+                  <label className="ai-set">목표
+                    <select className="ai-select ai-ctrl" value={pathwayGoal} onChange={(e) => setPathwayGoal(e.target.value)}>
                       {['내신', '수능', '기초', '심화'].map((g) => <option key={g}>{g}</option>)}
                     </select>
                   </label>
-                  <label className=ai-label>일일 학습 시간 (h)
-                    <input className=ai-number type=number min={0.5} max={12} step={0.5} value={pathwayHours}
+                  <label className="ai-set">일일 학습 시간 (h)
+                    <input className="ai-number ai-ctrl" type="number" min={0.5} max={12} step={0.5} value={pathwayHours}
                       onChange={(e) => setPathwayHours(Number(e.target.value))} />
                   </label>
-                  <p className=ai-sublabel>과목별 현재 성취도</p>
+                  <p className="ai-sublabel">과목별 현재 성취도</p>
                   {pathwaySubjects.map((s, i) => (
-                    <div key={s.subject} className=ai-row-inline>
-                      <span className=ai-row-label>{s.subject}</span>
-                      <input className=ai-range type=range min={0} max={100}
+                    <div key={s.subject} className="ai-row-inline">
+                      <span className="ai-row-label">{s.subject}</span>
+                      <input className="ai-range ai-ctrl" type="range" min={0} max={100}
                         value={s.score}
                         onChange={(e) => setPathwaySubjects((prev) => prev.map((x, j) => j === i ? { ...x, score: Number(e.target.value) } : x))} />
-                      <span className=ai-range-val>{s.score}</span>
+                      <span className="ai-range-val">{s.score}</span>
                     </div>
                   ))}
-                  <button className=ai-run-btn onClick={handlePathwayRecommend} disabled={pathwayLoading}>
+                  <button className="ai-run-btn" onClick={handlePathwayRecommend} disabled={pathwayLoading}>
                     {pathwayLoading ? '분석 중…' : '경로 추천 실행'}
                   </button>
-                  {pathwayError && <p className=ai-error>{pathwayError}</p>}
+                  {pathwayError && <p className="ai-error">{pathwayError}</p>}
                 </div>
               </section>
 
               {pathwayResult ? (
-                <section className=ai-panel>
-                  <header className=ai-panel-head><span className=ai-panel-kicker>Result</span><h2 className=ai-panel-title>추천 학습 경로</h2></header>
-                  <div className=ai-panel-body>
-                    <p className=ai-summary-text>{pathwayResult.summary as string}</p>
-                    <p className=ai-meta>총 예상 기간: {pathwayResult.totalEstimatedWeeks as number}주 ,  목표: {pathwayResult.goal as string}</p>
+                <section className="ai-panel">
+                  <header className="ai-panel-head"><span className="ai-panel-kicker">Result</span><h2 className="ai-panel-title">추천 학습 경로</h2></header>
+                  <div className="ai-panel-body">
+                    <p className="ai-summary-text">{pathwayResult.summary as string}</p>
+                    <p className="ai-meta">총 예상 기간: {pathwayResult.totalEstimatedWeeks as number}주 ,  목표: {pathwayResult.goal as string}</p>
                     {(pathwayResult.pathSteps as Array<Record<string, unknown>>).map((step) => (
-                      <div key={step.rank as number} className=ai-resource-card>
-                        <div className=ai-resource-header>
-                          <span className=ai-resource-rank>#{step.rank as number}</span>
-                          <strong className=ai-resource-title>{step.subject as string}</strong>
+                      <div key={step.rank as number} className="ai-resource-card">
+                        <div className="ai-resource-header">
+                          <span className="ai-resource-rank">#{step.rank as number}</span>
+                          <strong className="ai-resource-title">{step.subject as string}</strong>
                           <span className={`ai-badge ai-badge--${(step.currentScore as number) < 60 ? 'error' : (step.currentScore as number) < 75 ? 'warn' : 'ok'}`}>
                             현재 {step.currentScore as number}점 → 목표 {Math.round(step.targetScore as number)}점
                           </span>
                         </div>
-                        <p className=ai-resource-meta>주간 {step.weeklyHours as number}h ,  예상 {step.estimatedWeeks as number}주</p>
-                        <p className=ai-resource-units>집중 단원: {(step.focusUnits as string[]).join(' → ')}</p>
-                        <p className=ai-resource-tip>💡 {step.tip as string}</p>
-                        <a className=ai-resource-link href={(step.publicResource as string).includes('EBS') ? 'https://www.ebs.co.kr' : 'https://www.kmooc.kr'} target=_blank rel=noreferrer>
+                        <p className="ai-resource-meta">주간 {step.weeklyHours as number}h ,  예상 {step.estimatedWeeks as number}주</p>
+                        <p className="ai-resource-units">집중 단원: {(step.focusUnits as string[]).join(' → ')}</p>
+                        <p className="ai-resource-tip">💡 {step.tip as string}</p>
+                        <a className="ai-resource-link" href={(step.publicResource as string).includes('EBS') ? 'https://www.ebs.co.kr' : 'https://www.kmooc.kr'} target="_blank" rel="noreferrer">
                           📚 {step.publicResource as string} (무료)
                         </a>
                       </div>
@@ -2228,7 +2232,7 @@ export function AiWorkspacePage({ onBack }: Props) {
                   </div>
                 </section>
               ) : (
-                <HelpPanel title=학습 경로 가이드 items={[
+                <HelpPanel title="학습 경로 가이드" items={[
                   { term: '취약도 = (100 - 점수) × 중요도', meaning: '점수가 낮고 중요도가 높은 과목이 우선 배치됩니다.' },
                   { term: '집중 단원', meaning: '국가 교육과정 단원 구조 기반으로 선행 단원부터 제시합니다.' },
                   { term: '공공 자원', meaning: 'EBS, K-MOOC 등 무료 공공 학습 자원만 연결합니다.' },
@@ -2239,12 +2243,12 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {/* ── 조기 경보 탭 ─────────────────────────── */}
           {tab === 'warning' ? (
-            <div className=ai-panel-grid>
-              <section className=ai-panel>
-                <header className=ai-panel-head><span className=ai-panel-kicker>Early Warning</span><h2 className=ai-panel-title>조기 경보 시스템</h2></header>
-                <div className=ai-panel-body>
-                  <p className=ai-sublabel>최근 성적 (최대 5개, 쉼표 구분)</p>
-                  <input className=ai-text-input type=text
+            <div className="ai-panel-grid">
+              <section className="ai-panel">
+                <header className="ai-panel-head"><span className="ai-panel-kicker">Early Warning</span><h2 className="ai-panel-title">조기 경보 시스템</h2></header>
+                <div className="ai-panel-body">
+                  <p className="ai-sublabel">최근 성적 (최대 5개, 쉼표 구분)</p>
+                  <input className="ai-text-input ai-ctrl" type="text"
                     value={warningScores.join(', ')}
                     onChange={(e) => {
                       const nums = e.target.value.split(',').map((s) => Number(s.trim())).filter((n) => !isNaN(n) && n >= 0)
@@ -2255,41 +2259,41 @@ export function AiWorkspacePage({ onBack }: Props) {
                     { label: '과제 제출률 (%)', val: warningSubmission, set: setWarningSubmission },
                     { label: '수업 참여도 (%)', val: warningEngagement, set: setWarningEngagement },
                   ].map(({ label, val, set }) => (
-                    <div key={label} className=ai-row-inline>
-                      <span className=ai-row-label>{label}</span>
-                      <input className=ai-range type=range min={0} max={100} value={val}
+                    <div key={label} className="ai-row-inline">
+                      <span className="ai-row-label">{label}</span>
+                      <input className="ai-range ai-ctrl" type="range" min={0} max={100} value={val}
                         onChange={(e) => set(Number(e.target.value))} />
-                      <span className=ai-range-val>{val}</span>
+                      <span className="ai-range-val">{val}</span>
                     </div>
                   ))}
-                  <button className=ai-run-btn onClick={handleWarningCheck} disabled={warningLoading}>
+                  <button className="ai-run-btn" onClick={handleWarningCheck} disabled={warningLoading}>
                     {warningLoading ? '분석 중…' : '위험 수준 진단'}
                   </button>
-                  {warningError && <p className=ai-error>{warningError}</p>}
+                  {warningError && <p className="ai-error">{warningError}</p>}
                 </div>
               </section>
 
               {warningResult ? (
-                <section className=ai-panel>
-                  <header className=ai-panel-head><span className=ai-panel-kicker>Diagnosis</span><h2 className=ai-panel-title>경보 결과</h2></header>
-                  <div className=ai-panel-body>
+                <section className="ai-panel">
+                  <header className="ai-panel-head"><span className="ai-panel-kicker">Diagnosis</span><h2 className="ai-panel-title">경보 결과</h2></header>
+                  <div className="ai-panel-body">
                     <div className={`ai-warning-badge ai-warning-badge--${warningResult.level as string}`}>
                       위험 수준: {(warningResult.level as string).toUpperCase()} ,  지수 {warningResult.riskScore as number}/100
                     </div>
-                    <p className=ai-summary-text>{warningResult.summary as string}</p>
-                    <p className=ai-meta>평균 성적 {warningResult.avgScore as number}점 ,  추세 {(warningResult.trend as number) >= 0 ? '+' : ''}{warningResult.trend as number}점</p>
-                    <p className=ai-sublabel>트리거 요인</p>
-                    <ul className=ai-list>
-                      {(warningResult.triggers as string[]).map((t, i) => <li key={i} className=ai-list-item ai-list-item--warn>⚠️ {t}</li>)}
+                    <p className="ai-summary-text">{warningResult.summary as string}</p>
+                    <p className="ai-meta">평균 성적 {warningResult.avgScore as number}점 ,  추세 {(warningResult.trend as number) >= 0 ? '+' : ''}{warningResult.trend as number}점</p>
+                    <p className="ai-sublabel">트리거 요인</p>
+                    <ul className="ai-list">
+                      {(warningResult.triggers as string[]).map((t, i) => <li key={i} className="ai-list-item ai-list-item--warn">⚠️ {t}</li>)}
                     </ul>
-                    <p className=ai-sublabel>권장 조치</p>
-                    <ul className=ai-list>
-                      {(warningResult.recommendedActions as string[]).map((a, i) => <li key={i} className=ai-list-item>→ {a}</li>)}
+                    <p className="ai-sublabel">권장 조치</p>
+                    <ul className="ai-list">
+                      {(warningResult.recommendedActions as string[]).map((a, i) => <li key={i} className="ai-list-item">→ {a}</li>)}
                     </ul>
                   </div>
                 </section>
               ) : (
-                <HelpPanel title=조기 경보 가이드 items={[
+                <HelpPanel title="조기 경보 가이드" items={[
                   { term: '위험 수준 HIGH', meaning: '즉각적인 교사, 상담 개입이 필요한 상태입니다.', tip: '성적 하락 + 출결 저조가 겹치면 HIGH로 분류됩니다.' },
                   { term: '추세 (Trend)', meaning: '가장 오래된 점수와 최신 점수의 차이입니다. 음수면 하락입니다.' },
                   { term: '참여도', meaning: '수업 중 발언, 질문 횟수 등을 0~100으로 자체 평가합니다.' },
@@ -2300,70 +2304,70 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {/* ── 형평성 지수 탭 ───────────────────────── */}
           {tab === 'equity' ? (
-            <div className=ai-panel-grid>
-              <section className=ai-panel>
-                <header className=ai-panel-head><span className=ai-panel-kicker>Equity Index</span><h2 className=ai-panel-title>교육 형평성 지수</h2></header>
-                <div className=ai-panel-body>
-                  <label className=ai-label>지역
-                    <select className=ai-select value={equityRegion} onChange={(e) => setEquityRegion(e.target.value)}>
+            <div className="ai-panel-grid">
+              <section className="ai-panel">
+                <header className="ai-panel-head"><span className="ai-panel-kicker">Equity Index</span><h2 className="ai-panel-title">교육 형평성 지수</h2></header>
+                <div className="ai-panel-body">
+                  <label className="ai-set">지역
+                    <select className="ai-select ai-ctrl" value={equityRegion} onChange={(e) => setEquityRegion(e.target.value)}>
                       {['전국','서울','경기','부산','인천','대구','광주','대전','전남','전북','경북','경남','충북','충남','강원','제주'].map((r) => <option key={r}>{r}</option>)}
                     </select>
                   </label>
-                  <label className=ai-label>학교급
-                    <select className=ai-select value={equitySchoolType} onChange={(e) => setEquitySchoolType(e.target.value)}>
+                  <label className="ai-set">학교급
+                    <select className="ai-select ai-ctrl" value={equitySchoolType} onChange={(e) => setEquitySchoolType(e.target.value)}>
                       {['고등','중학','초등'].map((t) => <option key={t}>{t}</option>)}
                     </select>
                   </label>
-                  <label className=ai-label>연도
-                    <input className=ai-number type=number min={2020} max={2026} value={equityYear}
+                  <label className="ai-set">연도
+                    <input className="ai-number ai-ctrl" type="number" min={2020} max={2026} value={equityYear}
                       onChange={(e) => setEquityYear(Number(e.target.value))} />
                   </label>
-                  <button className=ai-run-btn onClick={handleEquityFetch} disabled={equityLoading}>
+                  <button className="ai-run-btn" onClick={handleEquityFetch} disabled={equityLoading}>
                     {equityLoading ? '조회 중…' : '형평성 지수 분석'}
                   </button>
-                  {equityError && <p className=ai-error>{equityError}</p>}
+                  {equityError && <p className="ai-error">{equityError}</p>}
                 </div>
               </section>
 
               {equityResult ? (
-                <section className=ai-panel>
-                  <header className=ai-panel-head><span className=ai-panel-kicker>Result</span><h2 className=ai-panel-title>{equityRegion} {equitySchoolType} 형평성</h2></header>
-                  <div className=ai-panel-body>
+                <section className="ai-panel">
+                  <header className="ai-panel-head"><span className="ai-panel-kicker">Result</span><h2 className="ai-panel-title">{equityRegion} {equitySchoolType} 형평성</h2></header>
+                  <div className="ai-panel-body">
                     <div className={`ai-equity-score ai-equity-score--${(equityResult.equityScore as number) >= 80 ? 'ok' : (equityResult.equityScore as number) >= 50 ? 'warn' : 'error'}`}>
-                      {equityResult.equityScore as number}<span className=ai-equity-unit>/100</span>
-                      <span className=ai-equity-grade>{equityResult.grade as string}</span>
+                      {equityResult.equityScore as number}<span className="ai-equity-unit">/100</span>
+                      <span className="ai-equity-grade">{equityResult.grade as string}</span>
                     </div>
-                    <p className=ai-summary-text>{equityResult.summary as string}</p>
+                    <p className="ai-summary-text">{equityResult.summary as string}</p>
                     {(() => {
                       const m = equityResult.metrics as Record<string, number>
                       const vn = equityResult.vsNational as Record<string, number>
                       return (
                         <>
-                          <div className=ai-metrics-row>
+                          <div className="ai-metrics-row">
                             {[
                               { label: '평균 성취도', val: m.averageScore, unit: '점' },
                               { label: '성취도 격차', val: m.achievementGap, unit: '점' },
                               { label: '교육 자원 지수', val: m.resourceIndex, unit: '' },
                               { label: '인프라 지수', val: m.infraIndex, unit: '' },
                             ].map(({ label, val, unit }) => (
-                              <div key={label} className=ai-metric-cell>
-                                <span className=ai-metric-label>{label}</span>
-                                <span className=ai-metric-val>{val}{unit}</span>
+                              <div key={label} className="ai-metric-cell">
+                                <span className="ai-metric-label">{label}</span>
+                                <span className="ai-metric-val">{val}{unit}</span>
                               </div>
                             ))}
                           </div>
-                          <p className=ai-meta>전국 대비 성취도 {vn.avgDiff >= 0 ? '+' : ''}{vn.avgDiff}점 ,  형평성 {vn.equityDiff >= 0 ? '+' : ''}{vn.equityDiff}</p>
+                          <p className="ai-meta">전국 대비 성취도 {vn.avgDiff >= 0 ? '+' : ''}{vn.avgDiff}점 ,  형평성 {vn.equityDiff >= 0 ? '+' : ''}{vn.equityDiff}</p>
                         </>
                       )
                     })()}
-                    <p className=ai-sublabel>정책 권고</p>
-                    <ul className=ai-list>
-                      {(equityResult.recommendations as string[]).map((r, i) => <li key={i} className=ai-list-item>→ {r}</li>)}
+                    <p className="ai-sublabel">정책 권고</p>
+                    <ul className="ai-list">
+                      {(equityResult.recommendations as string[]).map((r, i) => <li key={i} className="ai-list-item">→ {r}</li>)}
                     </ul>
                   </div>
                 </section>
               ) : (
-                <HelpPanel title=형평성 지수 가이드 items={[
+                <HelpPanel title="형평성 지수 가이드" items={[
                   { term: '형평성 점수 (0~100)', meaning: '격차가 작고 자원, 인프라가 풍부할수록 높습니다.' },
                   { term: '성취도 격차', meaning: '상위 집단과 하위 집단 간 평균 점수 차이입니다.' },
                   { term: '공공 데이터 연계', meaning: 'KESS 교육통계 API 연동 시 실데이터로 자동 교체됩니다.' },
@@ -2374,49 +2378,49 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {/* ── 자원 매칭 탭 ─────────────────────────── */}
           {tab === 'resources' ? (
-            <div className=ai-panel-grid>
-              <section className=ai-panel>
-                <header className=ai-panel-head><span className=ai-panel-kicker>Resource Matching</span><h2 className=ai-panel-title>공공 학습 자원 매칭</h2></header>
-                <div className=ai-panel-body>
-                  <label className=ai-label>과목
-                    <select className=ai-select value={resourceSubject} onChange={(e) => setResourceSubject(e.target.value)}>
+            <div className="ai-panel-grid">
+              <section className="ai-panel">
+                <header className="ai-panel-head"><span className="ai-panel-kicker">Resource Matching</span><h2 className="ai-panel-title">공공 학습 자원 매칭</h2></header>
+                <div className="ai-panel-body">
+                  <label className="ai-set">과목
+                    <select className="ai-select ai-ctrl" value={resourceSubject} onChange={(e) => setResourceSubject(e.target.value)}>
                       {['수학','영어','국어','과학','사회'].map((s) => <option key={s}>{s}</option>)}
                     </select>
                   </label>
-                  <div className=ai-row-inline>
-                    <span className=ai-row-label>현재 성취도</span>
-                    <input className=ai-range type=range min={0} max={100} value={resourceLevel}
+                  <div className="ai-row-inline">
+                    <span className="ai-row-label">현재 성취도</span>
+                    <input className="ai-range ai-ctrl" type="range" min={0} max={100} value={resourceLevel}
                       onChange={(e) => setResourceLevel(Number(e.target.value))} />
-                    <span className=ai-range-val>{resourceLevel}점</span>
+                    <span className="ai-range-val">{resourceLevel}점</span>
                   </div>
-                  <label className=ai-label>선호 형식
-                    <select className=ai-select value={resourceFormat} onChange={(e) => setResourceFormat(e.target.value)}>
-                      <option value=>전체</option>
-                      <option value=video>동영상</option>
-                      <option value=mooc>MOOC</option>
-                      <option value=library>도서관</option>
+                  <label className="ai-set">선호 형식
+                    <select className="ai-select ai-ctrl" value={resourceFormat} onChange={(e) => setResourceFormat(e.target.value)}>
+                      <option value="">전체</option>
+                      <option value="video">동영상</option>
+                      <option value="mooc">MOOC</option>
+                      <option value="library">도서관</option>
                     </select>
                   </label>
-                  <button className=ai-run-btn onClick={handleResourceMatch} disabled={resourceLoading}>
+                  <button className="ai-run-btn" onClick={handleResourceMatch} disabled={resourceLoading}>
                     {resourceLoading ? '매칭 중…' : '자원 추천 실행'}
                   </button>
-                  {resourceError && <p className=ai-error>{resourceError}</p>}
+                  {resourceError && <p className="ai-error">{resourceError}</p>}
                 </div>
               </section>
 
               {resourceResult ? (
-                <section className=ai-panel>
-                  <header className=ai-panel-head><span className=ai-panel-kicker>Matched</span><h2 className=ai-panel-title>추천 자원 {resourceResult.matchedCount as number}개</h2></header>
-                  <div className=ai-panel-body>
-                    <p className=ai-summary-text>{resourceResult.summary as string}</p>
+                <section className="ai-panel">
+                  <header className="ai-panel-head"><span className="ai-panel-kicker">Matched</span><h2 className="ai-panel-title">추천 자원 {resourceResult.matchedCount as number}개</h2></header>
+                  <div className="ai-panel-body">
+                    <p className="ai-summary-text">{resourceResult.summary as string}</p>
                     {(resourceResult.resources as Array<Record<string, unknown>>).map((r, i) => (
-                      <div key={i} className=ai-resource-card>
-                        <div className=ai-resource-header>
-                          <span className=ai-badge ai-badge--ok>{r.cost as string}</span>
-                          <strong className=ai-resource-title>{r.title as string}</strong>
+                      <div key={i} className="ai-resource-card">
+                        <div className="ai-resource-header">
+                          <span className="ai-badge ai-badge--ok">{r.cost as string}</span>
+                          <strong className="ai-resource-title">{r.title as string}</strong>
                         </div>
-                        <p className=ai-resource-meta>유형: {r.type as string} ,  난이도: {r.difficulty as string}</p>
-                        <a className=ai-resource-link href={r.url as string} target=_blank rel=noreferrer>
+                        <p className="ai-resource-meta">유형: {r.type as string} ,  난이도: {r.difficulty as string}</p>
+                        <a className="ai-resource-link" href={r.url as string} target="_blank" rel="noreferrer">
                           🔗 바로가기
                         </a>
                       </div>
@@ -2424,7 +2428,7 @@ export function AiWorkspacePage({ onBack }: Props) {
                   </div>
                 </section>
               ) : (
-                <HelpPanel title=자원 매칭 가이드 items={[
+                <HelpPanel title="자원 매칭 가이드" items={[
                   { term: 'EBS 무료 강좌', meaning: '수능, 내신 대비 공식 콘텐츠로 전 과목 무료 제공합니다.' },
                   { term: 'K-MOOC', meaning: '국내 대학 강의를 무료로 수강할 수 있는 공공 플랫폼입니다.' },
                   { term: 'KOCW', meaning: '대학 개방 강의 포털. 심화 학습에 적합합니다.' },
@@ -2436,58 +2440,58 @@ export function AiWorkspacePage({ onBack }: Props) {
 
           {/* ── 자연어 데이터 질의 탭 ───────────────── */}
           {tab === 'nlq' ? (
-            <div className=ai-panel-grid ai-panel-grid--full>
-              <section className=ai-panel ai-panel--wide>
-                <header className=ai-panel-head><span className=ai-panel-kicker>NLQ ,  Natural Language Query</span><h2 className=ai-panel-title>데이터 자연어 질의</h2></header>
-                <div className=ai-panel-body>
-                  <p className=ai-sublabel>교육 데이터에 대해 자연어로 질문하세요. 복잡한 쿼리 없이 인사이트를 얻을 수 있습니다.</p>
-                  <div className=ai-nlq-chips>
+            <div className="ai-panel-grid ai-panel-grid--full">
+              <section className="ai-panel ai-panel--wide">
+                <header className="ai-panel-head"><span className="ai-panel-kicker">NLQ ,  Natural Language Query</span><h2 className="ai-panel-title">데이터 자연어 질의</h2></header>
+                <div className="ai-panel-body">
+                  <p className="ai-sublabel">교육 데이터에 대해 자연어로 질문하세요. 복잡한 쿼리 없이 인사이트를 얻을 수 있습니다.</p>
+                  <div className="ai-nlq-chips">
                     {[
                       '수학 성적이 낮은 학생의 주요 위험 요인은?',
                       '서울과 전남의 교육 격차가 큰 이유는?',
                       '영어 70점 학생에게 맞는 공부 순서를 알려줘',
                       '출결률이 낮은 학생은 어떤 개입이 효과적인가?',
                     ].map((q) => (
-                      <button key={q} className=ai-chip type=button onClick={() => setNlqInput(q)}>{q}</button>
+                      <button key={q} className="ai-chip" type="button" onClick={() => setNlqInput(q)}>{q}</button>
                     ))}
                   </div>
-                  <form className=ai-chat-form onSubmit={handleNlqSubmit}>
+                  <form className="ai-chat-form" onSubmit={handleNlqSubmit}>
                     <textarea
-                      className=ai-input
-                      placeholder=예) 3학년 2반 수학 성적이 지난 달보다 낮아졌는데 원인이 뭘까요?
+                      className="ai-input ai-ctrl"
+                      placeholder="예) 3학년 2반 수학 성적이 지난 달보다 낮아졌는데 원인이 뭘까요?"
                       value={nlqInput}
                       onChange={(e) => setNlqInput(e.target.value)}
                       rows={2}
                     />
-                    <button type=submit className=ai-send-btn disabled={nlqLoading || !nlqInput.trim()}>
+                    <button type="submit" className="ai-send-btn" disabled={nlqLoading || !nlqInput.trim()}>
                       {nlqLoading ? '분석 중…' : '질의'}
                     </button>
                   </form>
-                  {nlqError && <p className=ai-error>{nlqError}</p>}
+                  {nlqError && <p className="ai-error">{nlqError}</p>}
                 </div>
               </section>
 
               {nlqResult ? (
-                <section className=ai-panel ai-panel--wide>
-                  <header className=ai-panel-head>
-                    <span className=ai-panel-kicker>Domain: {nlqResult.domain as string}</span>
-                    <h2 className=ai-panel-title>{nlqResult.intent as string}</h2>
-                    {nlqResult.simulation ? <span className=ai-badge ai-badge--warn>시뮬레이션</span> : <span className=ai-badge ai-badge--ok>Live</span>}
+                <section className="ai-panel ai-panel--wide">
+                  <header className="ai-panel-head">
+                    <span className="ai-panel-kicker">Domain: {nlqResult.domain as string}</span>
+                    <h2 className="ai-panel-title">{nlqResult.intent as string}</h2>
+                    {nlqResult.simulation ? <span className="ai-badge ai-badge--warn">시뮬레이션</span> : <span className="ai-badge ai-badge--ok">Live</span>}
                   </header>
-                  <div className=ai-panel-body>
-                    <div className=ai-nlq-answer>{nlqResult.answer as string}</div>
+                  <div className="ai-panel-body">
+                    <div className="ai-nlq-answer">{nlqResult.answer as string}</div>
                     {Object.keys((nlqResult.keyEntities as Record<string, string>) ?? {}).filter((k) => (nlqResult.keyEntities as Record<string, string>)[k]).length > 0 ? (
-                      <div className=ai-nlq-entities>
+                      <div className="ai-nlq-entities">
                         {Object.entries((nlqResult.keyEntities as Record<string, string>)).filter(([, v]) => v).map(([k, v]) => (
-                          <span key={k} className=ai-chip ai-chip--entity>{k}: {v}</span>
+                          <span key={k} className="ai-chip ai-chip--entity">{k}: {v}</span>
                         ))}
                       </div>
                     ) : null}
                     {(nlqResult.suggestedActions as string[])?.length > 0 ? (
                       <>
-                        <p className=ai-sublabel>다음 단계</p>
-                        <ul className=ai-list>
-                          {(nlqResult.suggestedActions as string[]).map((a, i) => <li key={i} className=ai-list-item>→ {a}</li>)}
+                        <p className="ai-sublabel">다음 단계</p>
+                        <ul className="ai-list">
+                          {(nlqResult.suggestedActions as string[]).map((a, i) => <li key={i} className="ai-list-item">→ {a}</li>)}
                         </ul>
                       </>
                     ) : null}
@@ -2496,14 +2500,14 @@ export function AiWorkspacePage({ onBack }: Props) {
               ) : null}
 
               {nlqHistory.length > 0 ? (
-                <section className=ai-panel ai-panel--wide>
-                  <header className=ai-panel-head><span className=ai-panel-kicker>History</span><h2 className=ai-panel-title>최근 질의 내역</h2></header>
-                  <div className=ai-panel-body>
+                <section className="ai-panel ai-panel--wide">
+                  <header className="ai-panel-head"><span className="ai-panel-kicker">History</span><h2 className="ai-panel-title">최근 질의 내역</h2></header>
+                  <div className="ai-panel-body">
                     {nlqHistory.map(({ query, result }, i) => (
-                      <div key={i} className=ai-nlq-history-item>
-                        <span className=ai-badge>{result.domain as string}</span>
-                        <span className=ai-nlq-history-q>{query}</span>
-                        <span className=ai-nlq-history-a>{(result.answer as string).slice(0, 80)}…</span>
+                      <div key={i} className="ai-nlq-history-item">
+                        <span className="ai-badge">{result.domain as string}</span>
+                        <span className="ai-nlq-history-q">{query}</span>
+                        <span className="ai-nlq-history-a">{(result.answer as string).slice(0, 80)}…</span>
                       </div>
                     ))}
                   </div>

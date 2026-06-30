@@ -1,3 +1,5 @@
+import { apiJsonHeaders } from './apiHeaders'
+
 export type ChatRole = 'user' | 'assistant'
 
 export type ChatMessage = {
@@ -33,7 +35,7 @@ export async function askAi(message: string, history: ChatMessage[]): Promise<As
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: apiJsonHeaders(),
       body: JSON.stringify({ message, history }),
     })
 

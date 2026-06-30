@@ -49,7 +49,7 @@ function App() {
   }
 
   return (
-    <div className=page>
+    <div className="page">
       <PageChrome />
 
       <TourViewport

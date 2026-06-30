@@ -44,11 +44,11 @@ export function ContactTourSection({ reduceMotion, advance, rewind }: Props) {
   }, [])
 
   return (
-    <section className=tour-section-shell tour-section--editorial>
-      <div className=tour-single-stack>
+    <section className="tour-section-shell tour-section--editorial">
+      <div className="tour-single-stack">
         <motion.div
-          key=contact-copy
-          className=tour-panel-scroll
+          key="contact-copy"
+          className="tour-panel-scroll"
           initial={enter}
           animate={{ opacity: 1, y: 0 }}
           transition={transition}
@@ -56,32 +56,32 @@ export function ContactTourSection({ reduceMotion, advance, rewind }: Props) {
           <EditorialTourPanel
             advance={advance}
             rewind={rewind}
-            wheelHint=휠 ↓ 첫 화면으로 돌아가기, ↑ 이전
+            wheelHint="휠 ↓ 첫 화면으로 돌아가기, ↑ 이전"
           >
-            <p className=hero-panel-eyebrow>Contact</p>
-            <h2 className=hero-panel-headline>
+            <p className="hero-panel-eyebrow">Contact</p>
+            <h2 className="hero-panel-headline">
               Class Orbit
               <br />
               shell.
             </h2>
-            <p className=hero-panel-lead>
-              <span className=hero-panel-accent lang=en>
+            <p className="hero-panel-lead">
+              <span className="hero-panel-accent" lang="en">
                 Contact, API status, one surface.
               </span>{' '}
               「정식 서비스에서는 이 화면에서 연락처와 서비스 상태를 바로 확인할 수 있습니다.」
               <br />
               <br />
               {healthJson ? (
-                <pre className=tour-health-pre role=status aria-label=API health JSON>
+                <pre className="tour-health-pre" role="status" aria-label="API health JSON">
                   {healthJson}
                 </pre>
               ) : healthErr ? (
-                <p className=tour-health-fallback>
+                <p className="tour-health-fallback">
                   백엔드가 꺼져 있거나 프록시가 없으면 /api/health를 불러올 수 없습니다. 로컬에서는 Vite와
                   uvicorn을 함께 띄운 뒤 새로고침하세요.
                 </p>
               ) : (
-                <p className=tour-health-fallback>API 상태를 불러오는 중…</p>
+                <p className="tour-health-fallback">API 상태를 불러오는 중…</p>
               )}
               <br />
               2026 — Educational AI interface shell

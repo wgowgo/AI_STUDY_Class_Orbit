@@ -23,9 +23,9 @@ export function TourBackdrop({ dimmed, reduceMotion }: Props) {
   const scrimExtraOpacity = reduceMotion ? 0 : dimmed ? 0.4 : 0
 
   return (
-    <div className=tour-backdrop aria-hidden>
+    <div className="tour-backdrop aria-hidden">
       <motion.div
-        className=hero-bg
+        className="hero-bg"
         animate={bgMotion}
         transition={{ duration: 0.85, ease: easeOut }}
         style={{ backgroundImage: 'url(/hero-bookshelf.png)' }}
@@ -33,7 +33,7 @@ export function TourBackdrop({ dimmed, reduceMotion }: Props) {
       {!reduceMotion ? (
         <>
           <motion.div
-            className=hero-blob hero-blob--a
+            className="hero-blob hero-blob--a"
             animate={{
               x: [0, 28, -8, 0],
               y: [0, -22, 12, 0],
@@ -46,7 +46,7 @@ export function TourBackdrop({ dimmed, reduceMotion }: Props) {
             }}
           />
           <motion.div
-            className=hero-blob hero-blob--b
+            className="hero-blob hero-blob--b"
             animate={{
               x: [0, -20, 14, 0],
               y: [0, 18, -10, 0],
@@ -60,7 +60,7 @@ export function TourBackdrop({ dimmed, reduceMotion }: Props) {
             }}
           />
           <motion.div
-            className=hero-blob hero-blob--c
+            className="hero-blob hero-blob--c"
             animate={{
               opacity: [0.12, 0.22, 0.14, 0.12],
               scale: [1, 1.08, 1],
@@ -73,14 +73,14 @@ export function TourBackdrop({ dimmed, reduceMotion }: Props) {
           />
         </>
       ) : null}
-      <div className=hero-scrim />
+      <div className="hero-scrim" />
       <motion.div
-        className=hero-scrim-extra
+        className="hero-scrim-extra"
         animate={{ opacity: scrimExtraOpacity }}
         transition={{ duration: 0.55 }}
       />
       <motion.div
-        className=hero-grid
+        className="hero-grid"
         animate={gridMotion}
         transition={{ duration: 0.85, ease: easeOut }}
       />

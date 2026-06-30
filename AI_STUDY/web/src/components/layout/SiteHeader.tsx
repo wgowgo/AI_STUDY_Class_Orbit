@@ -22,38 +22,38 @@ export function SiteHeader({
   return (
     <>
       <motion.header
-        className=site-header
+        className="site-header"
         initial={reduceMotion ? false : { opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, ease: easeOut, delay: 0.08 }}
       >
         {onLogoClick ? (
           <motion.button
-            type=button
-            className=logo-mark-btn
-            aria-label=히어로로 이동
+            type="button"
+            className="logo-mark-btn"
+            aria-label="히어로로 이동"
             onClick={onLogoClick}
             initial={reduceMotion ? false : { scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.45, ease: easeOut, delay: 0.12 }}
           >
-            <span className=logo-mark aria-hidden />
+            <span className="logo-mark aria-hidden" />
           </motion.button>
         ) : (
           <motion.span
-            className=logo-mark
+            className="logo-mark"
             aria-hidden
             initial={reduceMotion ? false : { scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.45, ease: easeOut, delay: 0.12 }}
           />
         )}
-        <nav className=nav-desktop aria-label=주요 메뉴>
+        <nav className="nav-desktop" aria-label="주요 메뉴">
           {NAV.map((item, i) => (
             <motion.button
               key={item.id}
-              type=button
-              className=nav-link
+              type="button"
+              className="nav-link"
               onClick={() => onNavigate(item.id)}
               initial={reduceMotion ? false : { opacity: 0, y: -8 }}
               animate={{ opacity: 0.9, y: 0 }}
@@ -65,10 +65,10 @@ export function SiteHeader({
           ))}
         </nav>
         <motion.button
-          type=button
-          className=nav-burger
+          type="button"
+          className="nav-burger"
           aria-expanded={menuOpen}
-          aria-label=메뉴 열기
+          aria-label="메뉴 열기"
           onClick={onMenuToggle}
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -83,10 +83,10 @@ export function SiteHeader({
       <AnimatePresence>
         {menuOpen ? (
           <motion.div
-            key=nav-mobile
-            className=nav-mobile
-            role=dialog
-            aria-label=모바일 메뉴
+            key="nav-mobile"
+            className="nav-mobile"
+            role="dialog"
+            aria-label="모바일 메뉴"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -95,8 +95,8 @@ export function SiteHeader({
             {NAV.map((item, i) => (
               <motion.button
                 key={item.id}
-                type=button
-                className=nav-mobile-link
+                type="button"
+                className="nav-mobile-link"
                 onClick={() => onNavigate(item.id)}
                 initial={reduceMotion ? false : { opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
