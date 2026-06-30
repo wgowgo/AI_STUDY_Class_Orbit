@@ -34,7 +34,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # fill in locally; never commit .env
+cp .env.example .env 
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -112,7 +112,7 @@ Local fix scripts under `scripts/` are gitignored and not part of the published 
 
 ### 개요
 
-Class Orbit는 공공 교육 데이터와 AI 기능을 묶은 데모 프로젝트입니다. **Vite + React** 랜딩/투어 UI와 **AI Workspace**, **FastAPI** 백엔드로 구성됩니다. 로컬에서는 프론트가 `/api`를 8000번 포트 백엔드로 프록시합니다.
+Class Orbit는 공공 교육 데이터와 AI 기능을 묶은 데모 프로젝트입니다. **Vite + React** 랜당 투어 UI와 **AI Workspace**, **FastAPI** 백엔드로 구성됩니다. 로컬에서는 프론트가 `/api`를 8000번 포트 백엔드로 프록시합니다.
 
 **기술 스택**
 
@@ -138,7 +138,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # 로컬에서만 채우기, .env는 커밋 금지
+cp .env.example .env  
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -156,7 +156,7 @@ npm run dev
 
 ### 환경 변수
 
-`backend/.env.example`, `web/.env.example` 참고. 비밀 값은 `.env`에만 두세요 (gitignore 처리됨).
+`backend/.env.example`, `web/.env.example` 참고
 
 | 변수 | 용도 |
 |------|------|
