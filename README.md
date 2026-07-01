@@ -104,8 +104,6 @@ AI_STUDY/
 └── README.md
 ```
 
-Local fix scripts under `scripts/` are gitignored and not part of the published repo.
-
 ---
 
 ## 한국어
@@ -208,4 +206,4 @@ AI_STUDY/
 └── README.md
 ```
 
-로컬 수정용 `scripts/` 폴더는 gitignore 되어 저장소에 포함되지 않습니다.
+
